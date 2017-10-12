@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'personas',
     'rest_framework',
     'lugares',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -117,6 +118,22 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
+AUTH_USER_MODEL = "users.Users"
+
+JWT_AUTH = {
+    'JWT_AUTH_HEADER_PREFIX': 'Auth',
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/

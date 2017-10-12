@@ -45,7 +45,7 @@ class PersonasSerializer(serializers.ModelSerializer):
         """Docstring."""
 
         model = Personas
-        fields = ["nombre", "edad", "sexo", "tipo_de_persona"]
+        fields = ["id", "nombre", "edad", "sexo", "tipo_de_persona"]
 
 
 class PersonasModifierSerializer(serializers.Serializer):
