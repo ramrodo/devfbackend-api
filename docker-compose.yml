@@ -2,10 +2,12 @@ version: '2'
 services:
   procesoname-mysql:
     image: mysql
-    #build: .
     environment:
       - MYSQL_ROOT_PASSWORD=rodo123
+      - MYSQL_DATABASE=damificadosDb
   django-clase: 
     image: docker-api-devf
     ports:
       - "8000:8000"
+    depends_on:
+      - "procesoname-mysql"

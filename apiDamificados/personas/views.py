@@ -7,7 +7,8 @@ from rest_framework.response import Response
 
 from .models import Personas
 from .serializers import PeopleGetName, PersonasCreationSerializer, PersonasSerializer
-
+import json
+import requests
 
 class PersonasApi(APIView):
     """Clase."""
