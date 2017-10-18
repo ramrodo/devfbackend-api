@@ -38,10 +38,11 @@ class PersonasApi(APIView):
         data = { "notification": {"title": "Sadot EscoBBBBBBBBBar","body": "5 to 1","icon": "firebase-logo.png","click_action": "http://localhost:8081"},"to" : token}
         data = json.dumps(data)
         pushNotificacionJson = requests.post(baseUrl, headers=headers, data=data)
-        if pushNotificacionJson.status_code == 200 and "error" not in pushNotificacionJson['results'][0]:
-            return True
-        else:
-            return False
+        # if pushNotificacionJson.status_code == 200 and "error" not in pushNotificacionJson['results'][0]:
+        #     return True
+        # else:
+        #     return False
+        return True
 
 
 class PersonaApi(APIView):
@@ -62,7 +63,7 @@ class PersonaApi(APIView):
         serializers = PersonasSerializer(persona, request.data, partial=True)
         if serializers.is_valid():
             serializers.save()
-            return Response(serializers.data,status=status.HTTP_200_OK)
+            return Response(serializers.data,status=status.HTTP_202_ACCEPTED)
         else:
             return Response(serializers, status=status.HTTP_400_BAD_REQUEST)
 

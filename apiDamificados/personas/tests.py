@@ -11,13 +11,13 @@ class PersonasTests(TestCase):
         self.primer_persona = Personas.objects.create(nombre="Rodo", edad=24, sexo="H", tipo_de_persona="Voluntario")
         self.segunda_persona = Personas.objects.create(nombre="Laura", edad=24, sexo="M", tipo_de_persona="Damificado")
         self.persona_correcta_json = {
-            "nombre": "Jessica",
+            "nombre": "Rodo",
             "edad": 25,
             "sexo": "M",
             "tipo_de_persona": "Damificado"
         }
         self.persona_invalida_json = {
-            "nombre": "Jessica",
+            "nombre": "Ale",
             "edad": 25,
             "sexo": "666",
             "tipo_de_persona": "Damificado"
@@ -43,3 +43,15 @@ class PersonasTests(TestCase):
             data=json.dumps(self.persona_correcta_json),
             content_type="application/json")
         self.assertEqual(response.status_code, 201)
+
+    def test_delete_persona(self):
+        response = self.client.delete(reverse("persona_endpoint", kwargs={"pk": self.primer_persona.id}))
+        self.assertEqual(response.status_code, 204)
+
+    def test_put_persona(self):
+        response = self.client.put(
+            reverse("persona_endpoint", kwargs={"pk": self.segunda_persona.id}),
+            data=json.dumps(self.persona_correcta_json),
+            content_type="application/json")
+        self.assertEqual(response.status_code, 202)
+
